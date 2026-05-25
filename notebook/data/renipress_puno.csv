@@ -1,0 +1,12 @@
+codigo_renipress,nombre,categoria,ubigeo,distrito,provincia,latitud,longitud,horario,estado_operativo,capacidad_camas,servicios
+00000001,CENTRO DE SALUD METROPOLITANO PUNO,I-4,210101,Puno,Puno,-15.840221,-70.021881,08:00-20:00,true,24,vacunacion|control prenatal|control cred|tamizaje|nutricion
+00000002,PUESTO DE SALUD ACORA,I-2,210102,Acora,Puno,-15.972610,-69.796030,08:00-18:00,true,4,vacunacion|control cred|planificacion familiar
+00000003,CENTRO DE SALUD AZANGARO,I-4,210201,Azangaro,Azangaro,-14.908430,-70.196080,08:00-20:00,true,18,vacunacion|control prenatal|odontologia|tamizaje
+00000004,PUESTO DE SALUD MOHO,I-3,210901,Moho,Moho,-15.361780,-69.499240,08:00-18:00,true,8,vacunacion|control cred|nutricion
+00000005,CENTRO DE SALUD JULIACA SANTA ADRIANA,II-1,211101,Juliaca,San Roman,-15.493560,-70.133590,24 horas,true,40,vacunacion|control prenatal|tamizaje|odontologia|psicologia|nutricion
+00000006,PUESTO DE SALUD LAMPA,I-3,210701,Lampa,Lampa,-15.363090,-70.366330,08:00-18:00,true,7,vacunacion|control cred|odontologia
+00000007,CENTRO DE SALUD ILAVE,I-4,210501,Ilave,El Collao,-16.086900,-69.638560,08:00-20:00,true,16,vacunacion|control prenatal|tamizaje|planificacion familiar
+00000008,CENTRO DE SALUD MACUSANI,I-4,210301,Macusani,Carabaya,-14.069670,-70.431210,08:00-20:00,true,15,vacunacion|control cred|nutricion|psicologia
+00000009,PUESTO DE SALUD YUNGUYO,I-3,211301,Yunguyo,Yunguyo,-16.244720,-69.092500,08:00-18:00,true,6,vacunacion|control prenatal|planificacion familiar
+00000010,CENTRO DE SALUD AYAVIRI,I-4,210801,Ayaviri,Melgar,-14.881470,-70.588890,08:00-20:00,true,17,vacunacion|control prenatal|odontologia|tamizaje|nutricion
+

@@ -1,0 +1,11 @@
+ubigeo,provincia,distrito,fecha,temp_minima,precipitacion_mm,nivel_alerta,estacion_lat,estacion_lon,fuente
+210101,Puno,Puno,2026-05-18,1.8,2.0,1,-15.8240,-70.0180,SENAMHI
+210102,Puno,Acora,2026-05-18,0.4,1.2,1,-15.9720,-69.7980,SENAMHI
+210201,Azangaro,Azangaro,2026-05-18,-3.5,0.0,3,-14.9100,-70.1920,SENAMHI
+210901,Moho,Moho,2026-05-18,2.5,8.0,2,-15.3600,-69.5010,SENAMHI
+211101,San Roman,Juliaca,2026-05-18,4.0,1.0,0,-15.4900,-70.1300,SENAMHI
+210701,Lampa,Lampa,2026-05-18,-0.2,2.5,2,-15.3650,-70.3650,SENAMHI
+210501,El Collao,Ilave,2026-05-18,1.2,4.1,1,-16.0850,-69.6400,SENAMHI
+210301,Carabaya,Macusani,2026-05-18,-1.6,3.0,2,-14.0700,-70.4300,SENAMHI
+211301,Yunguyo,Yunguyo,2026-05-18,3.1,2.4,0,-16.2450,-69.0910,SENAMHI
+210801,Melgar,Ayaviri,2026-05-18,-2.4,0.8,3,-14.8820,-70.5900,SENAMHI

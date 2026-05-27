@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     senamhi_api_url: str = "https://senamhi.gob.pe/api/"
     renipress_csv_url: str = "https://www.susalud.gob.pe/registro-nacional/"
     cors_origins: str = "http://localhost:3000,http://localhost:5173"
+    cors_origin_regex: str = r"https://.*\.vercel\.app"
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 

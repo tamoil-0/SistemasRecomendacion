@@ -205,6 +205,34 @@ pdflatex informe_tecnico.tex
 pdflatex informe_tecnico.tex
 ```
 
+## Despliegue web
+
+Para entregar el sistema como enlace, se recomienda publicar:
+
+- Frontend en Vercel.
+- Backend en Render o Railway.
+- Base de datos PostgreSQL administrada.
+
+El paso a paso esta documentado en:
+
+```text
+DEPLOY.md
+```
+
+En Vercel se debe seleccionar la carpeta `frontend` y configurar:
+
+```env
+VITE_API_URL=https://url-del-backend
+```
+
+En el backend se debe configurar:
+
+```env
+DATABASE_URL=postgresql://usuario:password@host:puerto/base
+CORS_ORIGINS=https://url-del-frontend.vercel.app
+SECRET_KEY=clave_segura_de_produccion
+```
+
 ## Etica y privacidad
 
 El sistema no almacena datos clinicos individuales. Solo registra consultas preventivas operativas: ubicacion, tipo de atencion, edad, distancia maxima y recomendaciones generadas. El tratamiento se documenta bajo principios de minimizacion y finalidad, alineado con la Ley N. 29733 y el Decreto Supremo N. 003-2013-JUS.

@@ -7,11 +7,12 @@ export default function GraficoMetricas({ recomendaciones = [] }) {
   }))
 
   return (
-    <div className="h-64 rounded-lg app-surface p-4">
-      <h2 className="mb-3 text-sm font-bold text-slate-800">Scores por establecimiento</h2>
+    <div className="h-72 rounded-lg app-surface p-4">
+      <p className="section-title">Metricas</p>
+      <h2 className="mb-3 mt-1 text-lg font-black text-slate-950">Score por establecimiento</h2>
       <ResponsiveContainer width="100%" height="85%">
         <BarChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
           <XAxis dataKey="nombre" />
           <YAxis domain={[0, 1]} />
           <Tooltip formatter={(value) => Number(value).toFixed(3)} />

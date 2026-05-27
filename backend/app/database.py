@@ -9,10 +9,11 @@ class Base(DeclarativeBase):
 
 
 engine_options = {"pool_pre_ping": True}
-if settings.database_url.startswith("sqlite"):
+database_url = settings.async_database_url
+if database_url.startswith("sqlite"):
     engine_options["connect_args"] = {"check_same_thread": False}
 
-engine = create_async_engine(settings.database_url, **engine_options)
+engine = create_async_engine(database_url, **engine_options)
 AsyncSessionLocal = async_sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
 
 

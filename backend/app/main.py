@@ -8,6 +8,7 @@ from app.ml.predict import load_model
 from app.routers import admin, auth, clima, establecimientos, recomendaciones
 from app.services.clima_service import sync_senamhi
 from app.services.renipress_service import sync_renipress
+from app.services.usuario_seed import seed_demo_users
 
 
 @asynccontextmanager
@@ -16,6 +17,7 @@ async def lifespan(app: FastAPI):
         await conn.run_sync(Base.metadata.create_all)
     load_model()
     async with AsyncSessionLocal() as db:
+        await seed_demo_users(db)
         await sync_renipress(db)
         await sync_senamhi(db)
     scheduler = AsyncIOScheduler()

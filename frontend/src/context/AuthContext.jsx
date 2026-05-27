@@ -26,7 +26,7 @@ export function AuthProvider({ children }) {
     const data = await loginApi(credentials)
     setToken(data.access_token)
     const decoded = jwtDecode(data.access_token)
-    setUser({ email: decoded.sub, nombre: decoded.sub, is_admin: false })
+    setUser({ email: decoded.sub, nombre: decoded.nombre || decoded.sub, is_admin: Boolean(decoded.is_admin) })
     setSessionMessage('')
     return data
   }

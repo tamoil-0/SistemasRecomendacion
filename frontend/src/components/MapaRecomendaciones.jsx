@@ -33,7 +33,11 @@ export default function MapaRecomendaciones({ usuario, recomendaciones = [], foc
   const center = usuario ? [usuario.lat, usuario.lon] : [-15.840221, -70.021881]
 
   return (
-    <div className="relative h-[420px] overflow-hidden rounded-lg app-surface">
+    <div className="relative h-[440px] overflow-hidden rounded-lg app-surface">
+      <div className="absolute left-0 right-0 top-0 z-[1000] border-b border-slate-200 bg-white/95 px-4 py-3 backdrop-blur">
+        <p className="text-sm font-black text-slate-950">Mapa de recomendaciones</p>
+        <p className="text-xs font-semibold text-slate-500">Usuario, establecimientos y conexiones aproximadas</p>
+      </div>
       <MapContainer center={center} zoom={9} scrollWheelZoom>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -72,7 +76,7 @@ export default function MapaRecomendaciones({ usuario, recomendaciones = [], foc
           ))}
         <FocusMap focusItem={focusItem} />
       </MapContainer>
-      <div className="absolute bottom-3 left-3 z-[1000] grid gap-1 bg-white p-3 text-xs shadow-panel">
+      <div className="absolute bottom-3 left-3 z-[1000] grid gap-1 rounded-md bg-white p-3 text-xs font-semibold shadow-panel">
         <LegendItem color={colors[0]} label="Sin alerta" />
         <LegendItem color={colors[1]} label="Aviso" />
         <LegendItem color={colors[2]} label="Alerta" />

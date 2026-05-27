@@ -405,6 +405,30 @@ Informe tecnico & Documento ampliado con fases, modelo y arquitectura. \\
 \end{tabular}
 \end{table}
 
+\subsection{Resultado del despliegue web}
+Ademas de la ejecucion local, el proyecto fue publicado como aplicacion web. Este paso fue importante porque permite mostrar el sistema mediante enlaces publicos durante la sustentacion, sin tener que enviar todo el codigo por una carpeta comprimida o por Drive. La publicacion se organizo en tres partes: frontend en Vercel, backend en Render y base de datos PostgreSQL administrada en Render.
+
+\begin{table}[H]
+\centering
+\caption{Recursos publicados del proyecto.}
+\label{tab:recursos_publicados}
+\small
+\begin{tabular}{p{3.8cm}p{8.5cm}}
+\toprule
+Recurso & Enlace \\ 
+\midrule
+Repositorio GitHub & \url{https://github.com/tamoil-0/SistemasRecomendacion.git} \\
+Aplicacion web & \url{https://sistemas-recomendacion.vercel.app} \\
+API del sistema & \url{https://salud-preventiva-puno-api.onrender.com} \\
+Documentacion de API & \url{https://salud-preventiva-puno-api.onrender.com/docs} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+El despliegue tambien permitio validar la integracion entre componentes. El frontend publicado consume el backend mediante la variable \texttt{VITE\_API\_URL}. El backend, a su vez, se conecta a PostgreSQL usando variables de entorno configuradas en Render. Para que la comunicacion entre ambos servicios funcione desde navegador, se configuro CORS con el dominio del frontend desplegado. Con ello, el login, registro, busqueda de recomendaciones e historial pueden ejecutarse desde la version publicada.
+
+En el repositorio GitHub se dejo el codigo fuente necesario para reconstruir el sistema. Se excluyeron archivos generados o locales como entornos virtuales, \texttt{node\_modules/}, archivos \texttt{.env}, bases de datos SQLite locales y carpetas de compilacion. Esta organizacion facilita la revision del proyecto y evita subir dependencias innecesarias o informacion sensible.
+
 \section{Discusion}
 El proyecto demuestra que un sistema de recomendacion puede aplicarse a un problema regional y preventivo. A diferencia de los ejemplos habituales del curso, donde se recomiendan peliculas o productos, aqui se recomienda una alternativa de salud. Esto obliga a que el sistema sea mas cuidadoso en la forma de presentar sus resultados.
 
@@ -415,6 +439,8 @@ Otro punto importante es la explicabilidad. En un recomendador de entretenimient
 La inclusion del clima tambien aporta una diferencia frente a un recomendador simple. En la region Puno, la accesibilidad puede cambiar segun condiciones climaticas. Penalizar resultados con alerta permite que el ranking sea mas responsable. No elimina automaticamente un establecimiento, pero reduce su prioridad cuando existe mayor riesgo.
 
 El trabajo tambien evidencio la importancia de la interfaz. Una aplicacion puede tener un modelo correcto, pero si la pantalla muestra informacion confusa o demasiado tecnica, el usuario no comprende el resultado. La mejora visual realizada permitio que el sistema se perciba mas formal, limpio y relacionado con el curso.
+
+Finalmente, el despliegue en web aporto una validacion adicional. No solo se comprobo que el prototipo funcionara en la computadora de desarrollo, sino tambien que pudiera ejecutarse como sistema publicado, con frontend, API y base de datos conectados mediante servicios en la nube. Esto refuerza la presentacion del proyecto como prototipo funcional completo.
 
 \subsection{Limitaciones}
 La principal limitacion es que el prototipo trabaja con datos preparados para ejecucion local. Para una implementacion real seria necesario actualizar informacion desde fuentes oficiales, validar horarios, confirmar disponibilidad efectiva de servicios y revisar cambios en establecimientos.
@@ -441,6 +467,7 @@ Entre las mejoras futuras se proponen:
   \item La metodologia incluyo definicion del problema, preparacion de datos, analisis exploratorio, ajuste del modelo, desarrollo web y validacion.
   \item El sistema genera recomendaciones Top-N y presenta informacion suficiente para interpretar cada resultado.
   \item La interfaz fue mejorada para comunicar de forma formal el funcionamiento del recomendador y facilitar la sustentacion.
+  \item El proyecto fue publicado en la web mediante Vercel y Render, por lo que puede ser revisado desde enlaces publicos.
   \item Las evidencias del notebook, capturas, pruebas e informes respaldan que el prototipo fue implementado de manera completa.
 \end{itemize}
 
@@ -459,6 +486,16 @@ El informe tecnico desarrolla el proyecto con mayor detalle, incluyendo arquitec
 \begin{itemize}[leftmargin=*]
   \item Archivo fuente: \texttt{informe/informe\_tecnico.tex}
   \item Archivo compilado: \texttt{informe/informe\_tecnico.pdf}
+\end{itemize}
+
+\subsection{Repositorio y despliegue}
+Como evidencia de publicacion, el proyecto cuenta con repositorio y servicios desplegados:
+
+\begin{itemize}[leftmargin=*]
+  \item Repositorio GitHub: \href{https://github.com/tamoil-0/SistemasRecomendacion.git}{github.com/tamoil-0/SistemasRecomendacion}.
+  \item Frontend en Vercel: \href{https://sistemas-recomendacion.vercel.app}{sistemas-recomendacion.vercel.app}.
+  \item Backend en Render: \href{https://salud-preventiva-puno-api.onrender.com}{salud-preventiva-puno-api.onrender.com}.
+  \item Documentacion de API: \href{https://salud-preventiva-puno-api.onrender.com/docs}{salud-preventiva-puno-api.onrender.com/docs}.
 \end{itemize}
 
 \subsection{Capturas}

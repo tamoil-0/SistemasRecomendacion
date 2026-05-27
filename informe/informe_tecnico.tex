@@ -582,6 +582,30 @@ Frontend & Compilacion Vite y ejecucion local. & Aprobado \\
 
 La verificacion automatizada reporto 13 pruebas aprobadas en backend. El frontend compilo correctamente con Vite. El aviso de bundle grande corresponde principalmente a librerias de mapa y graficos, no a un error funcional.
 
+\subsection{Despliegue web del prototipo}
+Como parte de la entrega final, el prototipo fue publicado en servicios web para que pueda ser revisado sin depender de una ejecucion local. La publicacion se realizo separando responsabilidades: el frontend se desplego en Vercel, el backend se desplego en Render y la base de datos se configuro como PostgreSQL administrado en Render. Esta decision permite que la interfaz, la API y los datos funcionen como componentes independientes, manteniendo una arquitectura mas cercana a un entorno real de aplicacion web.
+
+\begin{table}[H]
+\centering
+\caption{Enlaces de despliegue y repositorio.}
+\label{tab:despliegue}
+\small
+\begin{tabular}{p{3.7cm}p{8.7cm}}
+\toprule
+Recurso & Enlace \\ 
+\midrule
+Repositorio GitHub & \url{https://github.com/tamoil-0/SistemasRecomendacion.git} \\
+Frontend publicado & \url{https://sistemas-recomendacion.vercel.app} \\
+Backend publicado & \url{https://salud-preventiva-puno-api.onrender.com} \\
+Documentacion API & \url{https://salud-preventiva-puno-api.onrender.com/docs} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+En Vercel se configuro el directorio \texttt{frontend/} como raiz del proyecto, usando Vite como framework de construccion. El frontend consume la API mediante la variable de entorno \texttt{VITE\_API\_URL}, apuntando al servicio publicado en Render. En Render se configuro el directorio \texttt{backend/} como raiz del servicio Docker, con variables de entorno para la conexion a PostgreSQL, clave secreta, tiempo de expiracion de token y origen permitido del frontend.
+
+Tambien se realizo un ajuste de CORS para permitir el dominio del frontend publicado en Vercel. Con ello, las solicitudes de login, registro, recomendacion e historial pueden ejecutarse desde la aplicacion web desplegada. En el repositorio se excluyeron archivos que no deben subirse a GitHub, como entornos virtuales, \texttt{node\_modules/}, archivos \texttt{.env}, bases SQLite locales y builds generados. De esta manera, el repositorio conserva el codigo fuente necesario para reconstruir el sistema y evita incluir dependencias o secretos.
+
 \section{8.- Conclusiones}
 \begin{itemize}[leftmargin=*]
   \item Se desarrollo un prototipo funcional completo de sistema de recomendacion aplicado a salud preventiva en Puno.
@@ -589,6 +613,7 @@ La verificacion automatizada reporto 13 pruebas aprobadas en backend. El fronten
   \item La similitud coseno permitio comparar el perfil de consulta con cada establecimiento de forma simple y reproducible.
   \item La penalidad climatica aporto pertinencia territorial, especialmente para una region donde el traslado puede verse afectado por heladas, lluvias o granizadas.
   \item La interfaz final comunica mejor el trabajo del recomendador: muestra metodo, criterios, score, similitud, penalidad y razon de recomendacion.
+  \item El prototipo fue desplegado en la web mediante Vercel y Render, permitiendo validar el sistema desde enlaces publicos.
   \item La principal limitacion es que el dataset usado es semilla y no reemplaza una sincronizacion oficial continua con fuentes actualizadas.
   \item El aprendizaje principal fue que un recomendador en salud debe ser explicable, prudente y contextual, no solamente matematicamente correcto.
 \end{itemize}
@@ -630,8 +655,10 @@ Las evidencias disponibles son:
 \begin{itemize}[leftmargin=*]
   \item Capturas en la carpeta \texttt{capturas/}.
   \item Pruebas automatizadas en \texttt{backend/tests/}.
-  \item Documentacion interactiva de la API en \texttt{http://localhost:8000/docs}.
-  \item Frontend en desarrollo en \texttt{http://localhost:5173}.
+  \item Repositorio GitHub: \href{https://github.com/tamoil-0/SistemasRecomendacion.git}{github.com/tamoil-0/SistemasRecomendacion}.
+  \item Frontend desplegado: \href{https://sistemas-recomendacion.vercel.app}{sistemas-recomendacion.vercel.app}.
+  \item Backend desplegado: \href{https://salud-preventiva-puno-api.onrender.com}{salud-preventiva-puno-api.onrender.com}.
+  \item Documentacion interactiva de la API: \href{https://salud-preventiva-puno-api.onrender.com/docs}{salud-preventiva-puno-api.onrender.com/docs}.
   \item Notebook del modelo en \path{notebook/sistema_recomendacion_salud_puno.ipynb}.
 \end{itemize}
 

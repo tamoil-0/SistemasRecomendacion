@@ -3,11 +3,11 @@ import { useEffect } from 'react'
 import { MapContainer, Marker, Polyline, Popup, TileLayer, useMap } from 'react-leaflet'
 
 const colors = {
-  user: '#1B4F8A',
-  0: '#2E7D32',
-  1: '#CA8A04',
-  2: '#EA580C',
-  3: '#DC2626',
+  user: '#22D3EE',
+  0: '#22C55E',
+  1: '#FACC15',
+  2: '#FB923C',
+  3: '#F87171',
 }
 
 function icon(color) {
@@ -33,10 +33,10 @@ export default function MapaRecomendaciones({ usuario, recomendaciones = [], foc
   const center = usuario ? [usuario.lat, usuario.lon] : [-15.840221, -70.021881]
 
   return (
-    <div className="relative h-[440px] overflow-hidden rounded-lg app-surface">
-      <div className="absolute left-0 right-0 top-0 z-[1000] border-b border-slate-200 bg-white/95 px-4 py-3 backdrop-blur">
-        <p className="text-sm font-black text-slate-950">Mapa de recomendaciones</p>
-        <p className="text-xs font-semibold text-slate-500">Usuario, establecimientos y conexiones aproximadas</p>
+    <div className="relative h-[440px] overflow-hidden rounded-2xl app-surface">
+      <div className="absolute left-0 right-0 top-0 z-[1000] border-b border-cyan-100/10 bg-slate-950/78 px-4 py-3 backdrop-blur">
+        <p className="text-sm font-black text-white">Mapa de recomendaciones</p>
+        <p className="text-xs font-semibold text-slate-400">Usuario, establecimientos y conexiones aproximadas</p>
       </div>
       <MapContainer center={center} zoom={9} scrollWheelZoom>
         <TileLayer
@@ -71,12 +71,12 @@ export default function MapaRecomendaciones({ usuario, recomendaciones = [], foc
                 [usuario.lat, usuario.lon],
                 [item.lat, item.lon],
               ]}
-              pathOptions={{ color: colors[item.nivel_alerta] || colors[0], weight: 2, opacity: 0.55 }}
+              pathOptions={{ color: colors[item.nivel_alerta] || colors[0], weight: 3, opacity: 0.68, dashArray: '8 10' }}
             />
           ))}
         <FocusMap focusItem={focusItem} />
       </MapContainer>
-      <div className="absolute bottom-3 left-3 z-[1000] grid gap-1 rounded-md bg-white p-3 text-xs font-semibold shadow-panel">
+      <div className="absolute bottom-3 left-3 z-[1000] grid gap-1 rounded-2xl border border-cyan-100/10 bg-slate-950/82 p-3 text-xs font-semibold text-slate-200 shadow-panel backdrop-blur">
         <LegendItem color={colors[0]} label="Sin alerta" />
         <LegendItem color={colors[1]} label="Aviso" />
         <LegendItem color={colors[2]} label="Alerta" />

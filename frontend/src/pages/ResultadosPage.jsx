@@ -21,10 +21,10 @@ export default function ResultadosPage() {
 
   if (!state?.resultado) {
     return (
-      <section className="mx-auto max-w-3xl rounded-lg app-surface p-6">
+      <section className="mx-auto max-w-3xl rounded-2xl app-surface p-6">
         <p className="section-title">Resultados</p>
-        <h1 className="mt-2 text-2xl font-black text-slate-950">Sin resultados activos</h1>
-        <p className="mt-2 text-sm leading-6 text-slate-700">Ejecuta una consulta para visualizar el dashboard de recomendaciones.</p>
+        <h1 className="mt-2 text-2xl font-black text-white">Sin resultados activos</h1>
+        <p className="mt-2 text-sm leading-6 text-slate-300">Ejecuta una consulta para visualizar el dashboard de recomendaciones.</p>
         <Link to="/buscar" className="btn-primary mt-5">
           Ir a busqueda
         </Link>
@@ -33,7 +33,7 @@ export default function ResultadosPage() {
   }
 
   return (
-    <section className="grid gap-5">
+    <section className="grid gap-5 animate-rise">
       <div className="page-band -mx-4 -mt-6 px-4 py-7 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Link to="/buscar" className="btn-ghost mb-4 px-0">
@@ -43,8 +43,8 @@ export default function ResultadosPage() {
           <div className="grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
             <div>
               <p className="section-title">Resultado del modelo</p>
-              <h1 className="mt-2 text-3xl font-black text-slate-950">Ranking de centros recomendados</h1>
-              <p className="mt-2 text-sm font-semibold text-slate-600">Consulta #{state.resultado.consulta_id}</p>
+              <h1 className="neon-text mt-2 text-3xl font-black">Ranking de centros recomendados</h1>
+              <p className="mt-2 text-sm font-semibold text-slate-300">Consulta #{state.resultado.consulta_id}</p>
             </div>
             <div className="grid gap-3 sm:grid-cols-4">
               <Kpi icon={GitCompareArrows} label="Modelo" value="Contenido" />
@@ -71,12 +71,12 @@ export default function ResultadosPage() {
 
 function Kpi({ icon: Icon, label, value }) {
   return (
-    <div className="rounded-lg border border-slate-200 bg-white px-4 py-3 shadow-sm">
+    <div className="rounded-2xl border border-cyan-100/10 bg-white/5 px-4 py-3 shadow-sm transition hover:bg-cyan-300/10">
       <div className="flex items-center gap-2 text-primary">
         <Icon className="h-4 w-4" aria-hidden="true" />
         <span className="text-xs font-black uppercase tracking-wide">{label}</span>
       </div>
-      <p className="mt-1 text-lg font-black text-slate-950">{value}</p>
+      <p className="mt-1 text-lg font-black text-white">{value}</p>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Database, MapPinned, ShieldCheck, ThermometerSun } from 'lucide-react'
+import { ArrowRight, Database, HeartPulse, MapPinned, Radar, ShieldCheck, ThermometerSun } from 'lucide-react'
 import MetodoRecomendacion from '../components/MetodoRecomendacion'
 
 const metrics = [
@@ -16,18 +16,20 @@ const workflow = [
 
 export default function HomePage() {
   return (
-    <section className="grid gap-6">
-      <div className="grid min-h-[calc(100vh-132px)] overflow-hidden rounded-lg app-surface lg:grid-cols-[1.08fr_0.92fr]">
-        <div className="flex flex-col justify-between p-6 sm:p-10">
+    <section className="grid gap-6 animate-rise">
+      <div className="grid min-h-[calc(100vh-132px)] overflow-hidden rounded-3xl app-surface scan-line lg:grid-cols-[1.08fr_0.92fr]">
+        <div className="relative flex flex-col justify-between p-6 sm:p-10">
+          <span className="orbital-glow right-10 top-8 h-20 w-20 bg-cyan-400/20" />
+          <span className="orbital-glow bottom-20 left-12 h-14 w-14 bg-emerald-400/20 delay-1" />
           <div>
-            <div className="inline-flex items-center gap-2 rounded-md border border-blue-100 bg-blue-50 px-3 py-2 text-sm font-black text-primary">
+            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-200/20 bg-cyan-300/10 px-4 py-2 text-sm font-black text-cyan-100 shadow-glow">
               <Database className="h-4 w-4" aria-hidden="true" />
               Plataforma regional de apoyo preventivo
             </div>
-            <h1 className="mt-6 max-w-4xl text-4xl font-black leading-tight text-slate-950 sm:text-5xl lg:text-6xl">
+            <h1 className="neon-text mt-6 max-w-4xl text-4xl font-black leading-tight sm:text-5xl lg:text-6xl">
               Sistema de Recomendacion de Centros de Salud Preventiva
             </h1>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-slate-700">
+            <p className="mt-5 max-w-2xl text-base leading-7 text-slate-300">
               Consulta establecimientos de Puno con un ranking explicable que integra RENIPRESS, distancia geografica, servicios disponibles y alertas SENAMHI.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
@@ -44,24 +46,27 @@ export default function HomePage() {
           <div className="mt-10 grid gap-3 sm:grid-cols-3">
             {metrics.map(([value, label]) => (
               <div key={label} className="kpi-card">
-                <p className="text-3xl font-black text-slate-950">{value}</p>
-                <p className="mt-1 text-xs font-bold uppercase tracking-wide text-slate-500">{label}</p>
+                <p className="text-3xl font-black text-white">{value}</p>
+                <p className="mt-1 text-xs font-bold uppercase tracking-[0.16em] text-cyan-100/70">{label}</p>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="grid border-t border-slate-200 bg-slate-50 lg:border-l lg:border-t-0">
+        <div className="grid border-t border-cyan-100/10 bg-slate-950/25 lg:border-l lg:border-t-0">
           <div className="map-visual relative min-h-[360px] border-b border-slate-200">
-            <div className="absolute left-6 top-6 rounded-md bg-white/95 p-4 shadow-panel">
+            <div className="absolute left-6 top-6 rounded-2xl glass-panel p-4">
               <p className="section-title">Vista territorial</p>
-              <h2 className="mt-1 text-lg font-black text-slate-950">Puno operativo</h2>
+              <h2 className="mt-1 text-lg font-black text-white">Puno operativo</h2>
+            </div>
+            <div className="absolute right-6 top-8 flex h-20 w-20 items-center justify-center rounded-full border border-cyan-200/20 bg-cyan-300/10 text-cyan-100 shadow-glow">
+              <Radar className="h-9 w-9 animate-pulse" aria-hidden="true" />
             </div>
             <Marker className="left-[28%] top-[32%]" color="bg-primary" label="Usuario" />
             <Marker className="left-[48%] top-[44%]" color="bg-health" label="I-4" />
             <Marker className="left-[67%] top-[29%]" color="bg-yellow-500" label="I-3" />
             <Marker className="left-[62%] top-[68%]" color="bg-orange-600" label="II-1" />
-            <div className="absolute bottom-5 left-5 grid gap-2 rounded-md bg-white/95 p-3 text-xs font-bold text-slate-700 shadow-panel">
+            <div className="absolute bottom-5 left-5 grid gap-2 rounded-2xl glass-panel p-3 text-xs font-bold text-slate-200">
               <Legend color="bg-health" text="sin alerta" />
               <Legend color="bg-yellow-500" text="aviso" />
               <Legend color="bg-orange-600" text="alerta activa" />
@@ -69,6 +74,7 @@ export default function HomePage() {
           </div>
 
           <div className="grid gap-3 p-5">
+            <Feature icon={HeartPulse} title="Analitica preventiva" text="Prioriza atencion primaria con datos territoriales y servicios disponibles." />
             <Feature icon={MapPinned} title="Cobertura territorial" text="Coordenadas y radio maximo para priorizar establecimientos cercanos." />
             <Feature icon={ThermometerSun} title="Riesgo climatico" text="Penalidad por alerta para mejorar la decision antes del traslado." />
             <Feature icon={ShieldCheck} title="Trazabilidad" text="Historial de consultas con datos minimos y finalidad preventiva." />
@@ -78,10 +84,10 @@ export default function HomePage() {
 
       <div className="grid gap-4 lg:grid-cols-3">
         {workflow.map(([step, title, text]) => (
-          <article key={step} className="app-surface rounded-lg p-5">
-            <span className="text-sm font-black text-primary">{step}</span>
-            <h2 className="mt-2 text-lg font-black text-slate-950">{title}</h2>
-            <p className="mt-2 text-sm leading-6 text-slate-600">{text}</p>
+          <article key={step} className="app-surface rounded-2xl p-5 transition hover:-translate-y-1 hover:shadow-glow">
+            <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-cyan-300/10 text-sm font-black text-cyan-100">{step}</span>
+            <h2 className="mt-3 text-lg font-black text-white">{title}</h2>
+            <p className="mt-2 text-sm leading-6 text-slate-300">{text}</p>
           </article>
         ))}
       </div>
@@ -92,13 +98,13 @@ export default function HomePage() {
 
 function Feature({ icon: Icon, title, text }) {
   return (
-    <article className="flex gap-3 rounded-lg border border-slate-200 bg-white p-4">
-      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-blue-50 text-primary">
+    <article className="flex gap-3 rounded-2xl border border-cyan-100/10 bg-white/5 p-4 transition hover:bg-cyan-300/10">
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cyan-300/10 text-primary">
         <Icon className="h-5 w-5" aria-hidden="true" />
       </span>
       <div>
-        <h2 className="font-black text-slate-950">{title}</h2>
-        <p className="text-sm leading-6 text-slate-600">{text}</p>
+        <h2 className="font-black text-white">{title}</h2>
+        <p className="text-sm leading-6 text-slate-300">{text}</p>
       </div>
     </article>
   )
@@ -107,8 +113,8 @@ function Feature({ icon: Icon, title, text }) {
 function Marker({ className, color, label }) {
   return (
     <div className={`absolute ${className}`}>
-      <span className={`block h-4 w-4 rounded-full ${color} ring-4 ring-white shadow-lg`} />
-      <span className="mt-2 inline-block rounded-md bg-white/95 px-2 py-1 text-xs font-black text-slate-800 shadow-sm">{label}</span>
+      <span className={`block h-4 w-4 rounded-full ${color} ring-4 ring-white/70 shadow-lg`} />
+      <span className="mt-2 inline-block rounded-lg border border-cyan-100/10 bg-slate-950/80 px-2 py-1 text-xs font-black text-cyan-50 shadow-sm">{label}</span>
     </div>
   )
 }

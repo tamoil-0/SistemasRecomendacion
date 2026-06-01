@@ -14,9 +14,9 @@ export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <div className="min-h-screen bg-[#f4f7fa]">
+        <div className="min-h-screen text-slate-100">
           <Navbar />
-          <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+          <main className="mx-auto max-w-7xl px-4 py-7 sm:px-6 lg:px-8">
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/login" element={<LoginPage />} />

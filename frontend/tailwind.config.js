@@ -4,12 +4,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#1B4F8A',
-        health: '#2E7D32',
-        ink: '#1F2937',
+        primary: '#22D3EE',
+        health: '#22C55E',
+        ink: '#E2E8F0',
+        night: '#07111F',
+        electric: '#2563EB',
       },
       boxShadow: {
-        panel: '0 8px 24px rgba(31, 41, 55, 0.08)',
+        panel: '0 20px 60px rgba(2, 6, 23, 0.35)',
+        glow: '0 0 36px rgba(34, 211, 238, 0.28)',
       },
     },
   },

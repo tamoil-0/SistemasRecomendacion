@@ -1,4 +1,4 @@
-import { Clock3, GitCompareArrows, MapPin, Navigation, ShieldAlert } from 'lucide-react'
+import { Clock3, GitCompareArrows, MapPin, Navigation, ShieldAlert, Sparkles } from 'lucide-react'
 
 const alertaMeta = {
   0: ['Sin alerta', 'bg-green-50 text-green-800 border-green-200'],
@@ -14,31 +14,34 @@ export default function TarjetaEstablecimiento({ item, onFocus }) {
   const penalty = Math.round(item.penalidad_clima * 100)
 
   return (
-    <article className="rounded-lg app-surface p-4 transition hover:-translate-y-0.5 hover:shadow-panel">
+    <article className="group rounded-2xl app-surface p-4 transition duration-200 hover:-translate-y-1 hover:border-cyan-200/35 hover:shadow-glow">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="rounded-md bg-primary px-2.5 py-1 text-sm font-black text-white">#{item.rank}</span>
-            <span className="rounded-md bg-slate-100 px-2 py-1 text-xs font-bold text-slate-700">{item.categoria}</span>
+            <span className="rounded-xl bg-gradient-to-br from-cyan-300 to-blue-600 px-2.5 py-1 text-sm font-black text-white shadow-glow">#{item.rank}</span>
+            <span className="rounded-xl border border-cyan-100/10 bg-white/5 px-2 py-1 text-xs font-bold text-slate-200">{item.categoria}</span>
           </div>
-          <h3 className="mt-3 text-base font-black leading-6 text-slate-950">{item.nombre}</h3>
+          <h3 className="mt-3 text-base font-black leading-6 text-white">{item.nombre}</h3>
         </div>
-        <span className={`shrink-0 rounded-md border px-2 py-1 text-xs font-black ${color}`}>{label}</span>
+        <span className={`shrink-0 rounded-xl border px-2 py-1 text-xs font-black ${color}`}>{label}</span>
       </div>
 
       <div className="mt-4">
-        <div className="mb-1 flex justify-between text-xs font-bold text-slate-600">
+        <div className="mb-1 flex justify-between text-xs font-bold text-slate-300">
           <span>Score final</span>
-          <span>{score}%</span>
+          <span className="text-cyan-100">{score}%</span>
         </div>
-        <div className="h-2 overflow-hidden rounded-full bg-slate-200">
-          <div className="h-full rounded-full bg-health" style={{ width: `${Math.min(score, 100)}%` }} />
+        <div className="h-2 overflow-hidden rounded-full bg-slate-900">
+          <div className="h-full rounded-full bg-gradient-to-r from-emerald-300 via-cyan-300 to-blue-500 transition-all duration-700" style={{ width: `${Math.min(score, 100)}%` }} />
         </div>
       </div>
 
-      <div className="mt-4 rounded-md border border-blue-100 bg-blue-50 p-3">
-        <p className="text-xs font-black uppercase tracking-wide text-primary">Por que se recomienda</p>
-        <p className="mt-1 text-sm leading-6 text-slate-700">
+      <div className="mt-4 rounded-2xl border border-cyan-100/10 bg-cyan-300/10 p-3">
+        <p className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-primary">
+          <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
+          Por que se recomienda
+        </p>
+        <p className="mt-1 text-sm leading-6 text-slate-300">
           Coincide con el servicio solicitado, esta dentro del radio de busqueda y mantiene un balance favorable entre similitud, distancia y riesgo climatico.
         </p>
       </div>
@@ -52,7 +55,7 @@ export default function TarjetaEstablecimiento({ item, onFocus }) {
 
       <div className="mt-4 flex flex-wrap gap-2">
         {item.servicios.map((servicio) => (
-          <span key={servicio} className="rounded-md bg-blue-50 px-2 py-1 text-xs font-bold text-primary">
+          <span key={servicio} className="rounded-full border border-cyan-100/10 bg-cyan-300/10 px-2 py-1 text-xs font-bold text-primary">
             {servicio}
           </span>
         ))}
@@ -68,12 +71,12 @@ export default function TarjetaEstablecimiento({ item, onFocus }) {
 
 function Info({ icon: Icon, label, value }) {
   return (
-    <div className="rounded-md bg-slate-50 p-3">
-      <dt className="flex items-center gap-2 text-xs font-black uppercase tracking-wide text-slate-500">
+    <div className="rounded-xl border border-cyan-100/10 bg-white/5 p-3">
+      <dt className="flex items-center gap-2 text-xs font-black uppercase tracking-wide text-slate-400">
         <Icon className="h-3.5 w-3.5" aria-hidden="true" />
         {label}
       </dt>
-      <dd className="mt-1 font-bold text-slate-900">{value}</dd>
+      <dd className="mt-1 font-bold text-white">{value}</dd>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { LocateFixed, MapPinned, Search, SlidersHorizontal, UserRound } from 'lucide-react'
+import { Crosshair, LocateFixed, MapPinned, Search, SlidersHorizontal, UserRound, Waves } from 'lucide-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -78,7 +78,7 @@ export default function UserForm({ onSubmit, isLoading }) {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="grid gap-5">
+    <form onSubmit={handleSubmit(onSubmit)} className="grid gap-5 animate-rise-slow">
       <div className="grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
         <Panel icon={UserRound} title="Perfil de consulta" text="Define el servicio preventivo y los parametros personales minimos.">
           <div className="grid gap-4 sm:grid-cols-2">
@@ -109,7 +109,7 @@ export default function UserForm({ onSubmit, isLoading }) {
                 Distancia maxima
                 <strong className="rounded-md bg-blue-50 px-2 py-1 text-primary">{distance} km</strong>
               </span>
-              <input className="accent-[#1B4F8A]" type="range" min="5" max="100" step="5" {...register('max_distancia_km')} />
+              <input className="h-2 cursor-pointer appearance-none rounded-full bg-cyan-200/10 accent-cyan-300" type="range" min="5" max="100" step="5" {...register('max_distancia_km')} />
             </label>
 
             <label className="grid gap-2 text-sm font-bold text-slate-700">
@@ -120,13 +120,18 @@ export default function UserForm({ onSubmit, isLoading }) {
                 <option value="10">10 recomendaciones</option>
               </select>
             </label>
-            <p className="rounded-md bg-slate-50 p-3 text-sm font-semibold text-slate-600">Se mostraran {topN} establecimientos ordenados por score final.</p>
+            <p className="rounded-xl border border-cyan-100/10 bg-cyan-300/10 p-3 text-sm font-semibold text-slate-300">Se mostraran {topN} establecimientos ordenados por score final.</p>
           </div>
         </Panel>
       </div>
 
       <Panel icon={MapPinned} title="Ubicacion territorial" text="Selecciona un distrito base o usa GPS para calcular distancia y rutas aproximadas.">
         <div className="grid gap-4">
+          <div className="map-visual relative min-h-32 overflow-hidden rounded-2xl border border-cyan-100/10 p-4">
+            <Waves className="absolute right-4 top-4 h-8 w-8 text-cyan-200/70" aria-hidden="true" />
+            <Crosshair className="absolute left-1/2 top-1/2 h-9 w-9 -translate-x-1/2 -translate-y-1/2 text-emerald-200 drop-shadow" aria-hidden="true" />
+            <p className="relative max-w-sm text-sm font-bold text-cyan-50">Calibracion geografica para estimar cercania, prioridad operativa y rutas aproximadas.</p>
+          </div>
           <div className="flex flex-wrap items-center gap-3">
             <button type="button" onClick={useCurrentLocation} className="btn-primary text-sm">
               <LocateFixed className="h-4 w-4" aria-hidden="true" />
@@ -157,7 +162,7 @@ export default function UserForm({ onSubmit, isLoading }) {
       </Panel>
 
       <div className="flex justify-end">
-        <button type="submit" disabled={isLoading} className="btn-primary bg-health px-5 disabled:cursor-not-allowed disabled:opacity-70">
+        <button type="submit" disabled={isLoading} className="btn-primary px-5 disabled:cursor-not-allowed disabled:opacity-70">
           <Search className="h-4 w-4" aria-hidden="true" />
           {isLoading ? 'Calculando ranking...' : 'Buscar recomendaciones'}
         </button>
@@ -168,14 +173,14 @@ export default function UserForm({ onSubmit, isLoading }) {
 
 function Panel({ icon: Icon, title, text, children }) {
   return (
-    <section className="app-surface rounded-lg p-5">
+    <section className="app-surface rounded-2xl p-5 transition hover:border-cyan-200/30">
       <div className="mb-5 flex items-start gap-3">
-        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-blue-50 text-primary">
+        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-cyan-300/10 text-primary shadow-glow">
           <Icon className="h-5 w-5" aria-hidden="true" />
         </span>
         <div>
-          <h2 className="text-lg font-black text-slate-950">{title}</h2>
-          <p className="text-sm leading-6 text-slate-600">{text}</p>
+          <h2 className="text-lg font-black text-white">{title}</h2>
+          <p className="text-sm leading-6 text-slate-300">{text}</p>
         </div>
       </div>
       {children}

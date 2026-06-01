@@ -8,12 +8,14 @@ export default function AlertaClimatica({ recomendaciones = [] }) {
   }
 
   return (
-    <div className="flex items-start gap-3 rounded-2xl border border-red-300/30 border-l-4 border-l-red-300 bg-red-500/10 p-4 text-red-100 shadow-panel" role="alert">
-      <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
-      <p className="text-sm font-medium">
-        Todos los establecimientos recomendados se encuentran en zonas con alerta climatica activa. Se recomienda verificar accesibilidad vial antes de trasladarse.
-      </p>
+    <div className="mb-5 flex items-center gap-3 rounded-xl border border-orange-200 bg-orange-50 px-4 py-3" role="alert">
+      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-orange-100 text-orange-600">
+        <AlertTriangle className="h-5 w-5" />
+      </div>
+      <div>
+        <p className="font-extrabold text-orange-800">Alerta climatica activa</p>
+        <p className="text-sm font-semibold text-orange-700">Verifica accesibilidad antes del traslado.</p>
+      </div>
     </div>
   )
 }
-

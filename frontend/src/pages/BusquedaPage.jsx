@@ -1,8 +1,15 @@
 import { useNavigate } from 'react-router-dom'
-import { Clock3, Map, ShieldCheck } from 'lucide-react'
-import MetodoRecomendacion from '../components/MetodoRecomendacion'
+import { Activity, Brain, MapPin, Shield } from 'lucide-react'
+import Topbar from '../components/Topbar'
 import UserForm from '../components/UserForm'
 import { useRecomendaciones } from '../hooks/useRecomendaciones'
+
+const kpis = [
+  { icon: MapPin,   label: 'Cobertura',  value: 'Region Puno', sub: '13 provincias',       color: 'text-blue-400',    bg: 'bg-blue-500/8',    border: 'border-blue-400/15' },
+  { icon: Brain,    label: 'Algoritmo',  value: 'Coseno + IA', sub: 'Similitud vectorial', color: 'text-brand-400',   bg: 'bg-brand-500/8',   border: 'border-brand-400/15' },
+  { icon: Activity, label: 'Respuesta',  value: 'Tiempo real', sub: 'Latencia < 2s',       color: 'text-emerald-400', bg: 'bg-emerald-500/8', border: 'border-emerald-400/15' },
+  { icon: Shield,   label: 'Privacidad', value: 'Datos min.',  sub: 'Sin info. clinica',   color: 'text-orange-400',  bg: 'bg-orange-500/8',  border: 'border-orange-400/15' },
+]
 
 export default function BusquedaPage() {
   const navigate = useNavigate()
@@ -10,49 +17,39 @@ export default function BusquedaPage() {
 
   async function handleSubmit(values) {
     const result = await mutation.mutateAsync(values)
-    navigate('/resultados', {
-      state: {
-        consulta: values,
-        resultado: result,
-      },
-    })
+    navigate('/resultados', { state: { consulta: values, resultado: result } })
   }
 
   return (
-    <section className="grid gap-5 animate-rise">
-      <div className="page-band -mx-4 -mt-6 px-4 py-7 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <p className="section-title">Motor de recomendacion</p>
-          <div className="mt-2 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-              <h1 className="neon-text text-3xl font-black">Consulta preventiva</h1>
-              <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-300">
-                El calculo prioriza coincidencia de servicio, radio territorial, capacidad operativa y penalidad climatica del dia.
-              </p>
-            </div>
-            <div className="grid gap-2 sm:grid-cols-3">
-              <MiniStat icon={Map} label="Territorio" value="Puno" />
-              <MiniStat icon={Clock3} label="Respuesta" value="Tiempo real" />
-              <MiniStat icon={ShieldCheck} label="Privacidad" value="Minima" />
-            </div>
-          </div>
-        </div>
-      </div>
-      {mutation.error && <p className="rounded-2xl border border-red-300/30 bg-red-500/10 p-3 text-sm font-bold text-red-100">No se pudo calcular la recomendacion. Verifica la API.</p>}
-      <MetodoRecomendacion compact />
-      <UserForm onSubmit={handleSubmit} isLoading={mutation.isPending} />
-    </section>
-  )
-}
+    <div className="animate-rise">
+      <Topbar title="Nueva consulta" subtitle="Motor de recomendacion" />
 
-function MiniStat({ icon: Icon, label, value }) {
-  return (
-    <div className="rounded-2xl border border-cyan-100/10 bg-white/5 px-4 py-3 shadow-sm transition hover:bg-cyan-300/10">
-      <div className="flex items-center gap-2 text-primary">
-        <Icon className="h-4 w-4" aria-hidden="true" />
-        <span className="text-xs font-black uppercase tracking-wide">{label}</span>
+      <div className="p-5 lg:p-8">
+        {/* KPI strip */}
+        <div className="mb-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
+          {kpis.map(({ icon: Icon, label, value, sub, color, bg, border }) => (
+            <div key={label} className={`card-elevated flex items-center gap-3 rounded-2xl px-4 py-4`}>
+              <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-50`}>
+                <Icon className={`h-5 w-5 text-brand-600`} />
+              </div>
+              <div className="min-w-0">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">{label}</p>
+                <p className="text-[13px] font-extrabold text-gray-900">{value}</p>
+                <p className="text-[10px] text-gray-400">{sub}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {mutation.error && (
+          <div className="mb-5 flex items-center gap-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3">
+            <span className="h-2 w-2 shrink-0 rounded-full bg-red-500" />
+            <p className="text-sm font-bold text-red-700">API no disponible. Verifica el backend.</p>
+          </div>
+        )}
+
+        <UserForm onSubmit={handleSubmit} isLoading={mutation.isPending} />
       </div>
-      <p className="mt-1 text-sm font-black text-white">{value}</p>
     </div>
   )
 }

@@ -1,49 +1,37 @@
-import { GitCompareArrows, MapPinned, ShieldCheck, SlidersHorizontal } from 'lucide-react'
+import { Brain, GitCompareArrows, MapPinned, ShieldCheck } from 'lucide-react'
 
 const steps = [
-  {
-    icon: GitCompareArrows,
-    title: 'Filtrado basado en contenido',
-    text: 'Se construye un perfil con el tipo de atencion solicitado y se compara con los servicios disponibles de cada establecimiento.',
-  },
-  {
-    icon: SlidersHorizontal,
-    title: 'Similitud coseno',
-    text: 'El sistema representa usuario y establecimientos como vectores, luego calcula que tan parecidos son para ordenar candidatos.',
-  },
-  {
-    icon: MapPinned,
-    title: 'Filtro territorial',
-    text: 'Primero descarta establecimientos fuera del radio maximo y despues incorpora la distancia al ranking final.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Penalidad climatica',
-    text: 'Si existe alerta SENAMHI, el score se reduce para evitar recomendar rutas o zonas con mayor riesgo operativo.',
-  },
+  { icon: GitCompareArrows, title: 'Contenido', value: 'servicio' },
+  { icon: Brain, title: 'Similitud', value: 'coseno' },
+  { icon: MapPinned, title: 'Distancia', value: 'haversine' },
+  { icon: ShieldCheck, title: 'Clima', value: 'SENAMHI' },
 ]
 
 export default function MetodoRecomendacion({ compact = false }) {
   return (
-    <section className="app-surface rounded-2xl p-5">
-      <p className="section-title">Metodo del recomendador</p>
-      <div className="mt-2 flex flex-col gap-2 lg:flex-row lg:items-end lg:justify-between">
+    <section className="dashboard-band p-4">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <h2 className="text-xl font-black text-white">Recomendacion hibrida con prioridad preventiva</h2>
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-300">
-            La logica principal es basada en contenido. El ranking final combina similitud del servicio, distancia, capacidad disponible y penalidad por clima.
-          </p>
+          <p className="section-title">Modelo</p>
+          <h2 className="mt-1 text-base font-extrabold text-gray-950">Ranking preventivo híbrido</h2>
         </div>
-        <div className="rounded-xl border border-cyan-100/10 bg-cyan-300/10 px-3 py-2 text-sm font-black text-primary">score final = similitud x ajuste climatico</div>
+        <span className="w-fit rounded-lg border border-brand-100 bg-brand-50 px-3 py-2 font-mono text-xs font-extrabold text-brand-800">
+          score = sim * distancia * capacidad * clima
+        </span>
       </div>
-      <div className={`mt-5 grid gap-3 ${compact ? 'sm:grid-cols-2' : 'md:grid-cols-4'}`}>
-        {steps.map(({ icon: Icon, title, text }) => (
-          <article key={title} className="rounded-2xl border border-cyan-100/10 bg-white/5 p-4 transition hover:-translate-y-1 hover:bg-cyan-300/10">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-300/10 text-primary shadow-glow">
-              <Icon className="h-5 w-5" aria-hidden="true" />
-            </span>
-            <h3 className="mt-3 font-black text-white">{title}</h3>
-            <p className="mt-2 text-sm leading-6 text-slate-300">{text}</p>
+
+      <div className={`mt-4 grid gap-3 ${compact ? 'sm:grid-cols-4' : 'sm:grid-cols-2 xl:grid-cols-4'}`}>
+        {steps.map(({ icon: Icon, title, value }) => (
+          <article key={title} className="rounded-xl border border-surface-200 bg-white px-4 py-3">
+            <div className="flex items-center gap-3">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-700">
+                <Icon className="h-4 w-4" />
+              </div>
+              <div>
+                <h3 className="text-sm font-extrabold text-gray-950">{title}</h3>
+                <p className="text-xs font-bold uppercase tracking-[0.08em] text-gray-400">{value}</p>
+              </div>
+            </div>
           </article>
         ))}
       </div>

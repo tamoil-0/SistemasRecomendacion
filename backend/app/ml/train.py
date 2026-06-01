@@ -8,7 +8,7 @@ MODEL_PATH = Path(__file__).resolve().parent / "modelo_salud.pkl"
 
 def train_model() -> dict[str, str | int]:
     artifact = {
-        "categorias": ["I-1", "I-2", "I-3", "I-4", "II-1", "II-2"],
+        "categorias": ["I-1", "I-2", "I-3", "I-4", "II-1", "II-2", "BOTICA", "FARMACIA", "CLINICA", "ODONTO", "CONSULT"],
         "servicios": [
             "vacunacion",
             "control prenatal",
@@ -18,6 +18,14 @@ def train_model() -> dict[str, str | int]:
             "psicologia",
             "nutricion",
             "planificacion familiar",
+            "botica",
+            "farmacia",
+            "clinica general",
+            "medicina general",
+            "emergencia",
+            "laboratorio",
+            "pediatria",
+            "ginecologia",
         ],
         "item_matrix_shape": np.array([[1.0, 0.0], [0.0, 1.0]]).shape,
         "descripcion": "Artefacto base para el recomendador content-based del backend.",

@@ -7,7 +7,7 @@ class ConsultaCreate(BaseModel):
     lon: float = Field(ge=-71.5, le=-68.0)
     tipo_atencion: str = Field(min_length=3, max_length=100)
     edad: int = Field(ge=1, le=120)
-    max_distancia_km: int = Field(default=30, ge=5, le=100)
+    max_distancia_km: int = Field(default=15, ge=1, le=100)
     top_n: int = Field(default=5, ge=1, le=10)
 
 

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 import pandas as pd
-from sqlalchemy import select
+from sqlalchemy import select, or_
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.models.establecimiento import Establecimiento, Servicio
 
@@ -12,23 +12,28 @@ SEED_PATH = Path(__file__).resolve().parents[2] / "data" / "renipress_puno_seed.
 
 async def sync_renipress(db: AsyncSession, csv_path: Path | None = None) -> dict[str, int | list[str]]:
     path = csv_path or SEED_PATH
-    df = pd.read_csv(path)
+    df = pd.read_csv(path, dtype={"codigo_renipress": str, "ubigeo": str})
     nuevos = 0
     actualizados = 0
     errores: list[str] = []
     for row in df.to_dict(orient="records"):
         try:
+            codigo = str(row["codigo_renipress"]).strip()
+            codigo_alt = codigo.lstrip("0") if codigo.isdigit() else codigo
             existing = await db.scalar(
-                select(Establecimiento).where(Establecimiento.codigo_renipress == str(row["codigo_renipress"]))
+                select(Establecimiento).where(
+                    or_(Establecimiento.codigo_renipress == codigo, Establecimiento.codigo_renipress == codigo_alt)
+                )
             )
             servicios = [s.strip().lower() for s in str(row["servicios"]).split("|") if s.strip()]
             if existing:
                 est = existing
                 actualizados += 1
             else:
-                est = Establecimiento(codigo_renipress=str(row["codigo_renipress"]))
+                est = Establecimiento(codigo_renipress=codigo)
                 db.add(est)
                 nuevos += 1
+            est.codigo_renipress = codigo
             est.nombre = row["nombre"]
             est.categoria = row["categoria"]
             est.ubigeo = str(row["ubigeo"]).zfill(6)

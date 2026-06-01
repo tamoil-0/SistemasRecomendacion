@@ -9,13 +9,20 @@ const schema = z.object({
   edad: z.coerce.number().min(1, 'Edad minima 1').max(120, 'Edad maxima 120'),
   lat: z.coerce.number().min(-17.5).max(-13),
   lon: z.coerce.number().min(-71.5).max(-68),
-  max_distancia_km: z.coerce.number().min(5).max(100),
+  max_distancia_km: z.coerce.number().min(1).max(100),
   top_n: z.coerce.number().min(3).max(10),
 })
 
 const distritos = [
-  { label: 'Puno', lat: -15.840221, lon: -70.021881 },
-  { label: 'Juliaca', lat: -15.49356, lon: -70.13359 },
+  { label: 'Juliaca Centro', lat: -15.49356, lon: -70.13359 },
+  { label: 'Juliaca Santa Adriana', lat: -15.49925, lon: -70.13856 },
+  { label: 'Juliaca Salida Puno', lat: -15.51364, lon: -70.12087 },
+  { label: 'Juliaca Cerro Colorado', lat: -15.47635, lon: -70.13764 },
+  { label: 'Puno Centro', lat: -15.840221, lon: -70.021881 },
+  { label: 'Puno Bellavista', lat: -15.83248, lon: -70.02221 },
+  { label: 'Puno Laykakota', lat: -15.84696, lon: -70.01874 },
+  { label: 'Puno Salcedo', lat: -15.86584, lon: -70.00671 },
+  { label: 'Puno Alto Puno', lat: -15.82466, lon: -70.03278 },
   { label: 'Azangaro', lat: -14.90843, lon: -70.19608 },
   { label: 'Moho', lat: -15.36178, lon: -69.49924 },
   { label: 'Ilave', lat: -16.0869, lon: -69.63856 },
@@ -30,6 +37,14 @@ export const serviciosCatalogo = [
   'psicologia',
   'nutricion',
   'planificacion familiar',
+  'botica',
+  'farmacia',
+  'clinica general',
+  'medicina general',
+  'emergencia',
+  'laboratorio',
+  'pediatria',
+  'ginecologia',
 ]
 
 export default function UserForm({ onSubmit, isLoading }) {
@@ -45,9 +60,9 @@ export default function UserForm({ onSubmit, isLoading }) {
     defaultValues: {
       tipo_atencion: 'vacunacion',
       edad: 25,
-      lat: -15.840221,
-      lon: -70.021881,
-      max_distancia_km: 30,
+      lat: -15.49356,
+      lon: -70.13359,
+      max_distancia_km: 15,
       top_n: 5,
     },
   })
@@ -109,7 +124,7 @@ export default function UserForm({ onSubmit, isLoading }) {
                 Distancia maxima
                 <strong className="rounded-md bg-blue-50 px-2 py-1 text-primary">{distance} km</strong>
               </span>
-              <input className="h-2 cursor-pointer appearance-none rounded-full bg-cyan-200/10 accent-cyan-300" type="range" min="5" max="100" step="5" {...register('max_distancia_km')} />
+              <input className="h-2 cursor-pointer appearance-none rounded-full bg-cyan-200/10 accent-cyan-300" type="range" min="1" max="100" step="1" {...register('max_distancia_km')} />
             </label>
 
             <label className="grid gap-2 text-sm font-bold text-slate-700">
@@ -125,7 +140,7 @@ export default function UserForm({ onSubmit, isLoading }) {
         </Panel>
       </div>
 
-      <Panel icon={MapPinned} title="Ubicacion territorial" text="Selecciona un distrito base o usa GPS para calcular distancia y rutas aproximadas.">
+      <Panel icon={MapPinned} title="Ubicacion territorial" text="Selecciona una zona urbana, punto de referencia o usa GPS para calcular cercania real.">
         <div className="grid gap-4">
           <div className="map-visual relative min-h-32 overflow-hidden rounded-2xl border border-cyan-100/10 p-4">
             <Waves className="absolute right-4 top-4 h-8 w-8 text-cyan-200/70" aria-hidden="true" />

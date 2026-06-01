@@ -3,7 +3,7 @@ import { ArrowRight, Database, HeartPulse, MapPinned, Radar, ShieldCheck, Thermo
 import MetodoRecomendacion from '../components/MetodoRecomendacion'
 
 const metrics = [
-  ['90', 'Puntos urbanos'],
+  ['200', 'Puntos urbanos'],
   ['16', 'Servicios preventivos'],
   ['3', 'Niveles de alerta'],
 ]

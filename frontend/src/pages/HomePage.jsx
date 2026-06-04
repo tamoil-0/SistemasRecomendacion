@@ -48,7 +48,7 @@ export default function HomePage() {
                 Plataforma de orientacion preventiva — Region Puno
               </div>
               <h1 className="mt-8 text-4xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-[3.6rem]">
-                Encuentra el centro de salud{' '}
+                Encuentra el GAAAAAA de salud{' '}
                 <span className="bg-gradient-to-r from-brand-300 to-brand-400 bg-clip-text text-transparent">preventiva</span>{' '}
                 mas adecuado
               </h1>
